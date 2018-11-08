@@ -5,13 +5,13 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"github.com/3scale/3scale-porta-go-client/client"
+	"github.com/3scale/api-operator/pkg/apis/3scale/v1alpha1"
 	"os"
 	"reflect"
 	"strconv"
 	"strings"
 
-	"github.com/3scale/ostia/threescaleAPI-operator/pkg/apis/3scale/v1alpha1"
-	"github.com/3scale/ostia/threescaleAPI-operator/pkg/threescale/system_client"
 	"github.com/getkin/kin-openapi/jsoninfo"
 	"github.com/getkin/kin-openapi/openapi3"
 )

@@ -1,8 +1,6 @@
-# "Ostia" Project main repository
+# "API-Operator" Project main repository
 
-Ostia aims to be an openshift native API Management software.
-
-This is a not supported/official redhat product.
+This is not a supported/official redhat product.
 
 ## Deployment
 

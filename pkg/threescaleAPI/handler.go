@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
+	"github.com/3scale/3scale-porta-go-client/client"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -13,8 +14,7 @@ import (
 	coreV1 "k8s.io/api/core/v1"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/3scale/ostia/threescaleAPI-operator/pkg/apis/3scale/v1alpha1"
-	"github.com/3scale/ostia/threescaleAPI-operator/pkg/threescale/system_client"
+	"github.com/3scale/api-operator/pkg/apis/3scale/v1alpha1"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/operator-framework/operator-sdk/pkg/sdk"
 )
