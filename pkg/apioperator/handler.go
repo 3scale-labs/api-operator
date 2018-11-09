@@ -1,4 +1,4 @@
-package threescaleAPI
+package apioperator
 
 import (
 	"context"
