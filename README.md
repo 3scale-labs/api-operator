@@ -11,29 +11,29 @@ This is not a supported/official redhat product.
 * Clone the repo:
 
 ```
-git clone https://github.com/3scale/ostia.git
-cd ostia
+git clone https://github.com/3scale/api-operator.git
+cd api-operator
 ```
 
 * At the cluster scope, create the Custom Resource Definition (requires `cluster-admin` role):
 
 ```
 oc login -u system:admin
-oc create -f ostia-operator/deploy/crd.yaml
+oc create -f api-operator/deploy/crd.yaml
 ```
 
 * Create the RBAC (requires `cluster-admin` role). Deploy the operator into the namespace where you wish to manage your API:
 
 ```
 oc new-project my-hello-api
-oc create -f ostia-operator/deploy/rbac.yaml
-oc create -f ostia-operator/deploy/operator.yaml
+oc create -f api-operator/deploy/rbac.yaml
+oc create -f api-operator/deploy/operator.yaml
 ```
 
 * Within the same namespace as the operator, deploy the example Custom Resource:
 
 ```
-oc create -f ostia-operator/deploy/cr.yaml -n my-hello-api
+oc create -f api-operator/deploy/cr.yaml -n my-hello-api
 ```
 
 ## Build
@@ -62,16 +62,16 @@ Other Platforms:
 curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 ```
 
-* Get the Ostia code
+* Get the API Operator code
 
 ```
-go get github.com/3scale/ostia
+go get github.com/3scale/api-operator
 ```
 
 * Run dep ensure
 
 ```
-cd ${GOPATH}/src/github.com/3scale/ostia/ostia-operator
+cd ${GOPATH}/src/github.com/3scale/api-operator
 dep ensure -v
 ```
 
@@ -86,27 +86,11 @@ Make sure ${GOPATH}/bin is added to your PATH
 * Build
 
 ```
-make build
+operator-sdk build yourregistry/imagename:version
 ```
 
 * Push
 
 ```
-make push
+docker push yourregistry/imagename:version
 ```
-
-## Testing
-
-The `ostia-operator` project is configured to use [circleci](https://circleci.com) and there are a number of integration tests
-which will run when a pull request is triggered against this repository.
-
-Tests can be run locally but expect a running an accessible OpenShift cluster with an `nip.io` hostname.
-Tests must be run by a user with an `admin` or `cluster-admin` role.
-
-Run integration tests via `make integration` which accepts an optional argument:
-1. `OPENSHIFT_PUBLIC_HOSTNAME`. The public hostname for OpenShift cluster. Default `127.0.0.1`
-
-At the start pf each test run, existing tests projects are marked for deletion. This can also be done manually by
-running `make clean_integration`.
-
-The same tests are run against the `circleci` build server but because of the executor type required, cannot be executed locally via `circleci build`.
