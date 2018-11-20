@@ -1,30 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apioperator
+  name: api-operator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: apioperator
+      name: api-operator
   template:
     metadata:
       labels:
-        name: apioperator
+        name: api-operator
     spec:
+      serviceAccountName: api-operator
       containers:
-        - name: apioperator
-          image: quay.io/3scale/api-operator:v0.0.1
+        - name: api-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
           ports:
           - containerPort: 60000
             name: metrics
           command:
-          - apioperator
+          - api-operator
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: OPERATOR_NAME
-              value: "apioperator"
+              value: "api-operator"
