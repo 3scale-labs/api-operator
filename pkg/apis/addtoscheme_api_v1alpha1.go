@@ -1,7 +1,7 @@
 package apis
 
 import (
-	"github.com/3scale/api-operator-old/pkg/apis/api/v1alpha1"
+	"github.com/3scale/api-operator/pkg/apis/api/v1alpha1"
 )
 
 func init() {

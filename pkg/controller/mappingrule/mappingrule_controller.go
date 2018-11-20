@@ -1,4 +1,4 @@
-package api
+package mappingrule
 
 import (
 	"context"
@@ -24,7 +24,7 @@ import (
 * business logic.  Delete these comments after modifying this file.*
  */
 
-// Add creates a new API Controller and adds it to the Manager. The Manager will set fields on the Controller
+// Add creates a new MAPPINGRULE Controller and adds it to the Manager. The Manager will set fields on the Controller
 // and Start it when the Manager is Started.
 func Add(mgr manager.Manager) error {
 	return add(mgr, newReconciler(mgr))
@@ -32,28 +32,28 @@ func Add(mgr manager.Manager) error {
 
 // newReconciler returns a new reconcile.Reconciler
 func newReconciler(mgr manager.Manager) reconcile.Reconciler {
-	return &ReconcileAPI{client: mgr.GetClient(), scheme: mgr.GetScheme()}
+	return &ReconcileMAPPINGRULE{client: mgr.GetClient(), scheme: mgr.GetScheme()}
 }
 
 // add adds a new Controller to mgr with r as the reconcile.Reconciler
 func add(mgr manager.Manager, r reconcile.Reconciler) error {
 	// Create a new controller
-	c, err := controller.New("api-controller", mgr, controller.Options{Reconciler: r})
+	c, err := controller.New("mappingrule-controller", mgr, controller.Options{Reconciler: r})
 	if err != nil {
 		return err
 	}
 
-	// Watch for changes to primary resource API
-	err = c.Watch(&source.Kind{Type: &apiv1alpha1.API{}}, &handler.EnqueueRequestForObject{})
+	// Watch for changes to primary resource MAPPINGRULE
+	err = c.Watch(&source.Kind{Type: &apiv1alpha1.MAPPINGRULE{}}, &handler.EnqueueRequestForObject{})
 	if err != nil {
 		return err
 	}
 
 	// TODO(user): Modify this to be the types you create that are owned by the primary resource
-	// Watch for changes to secondary resource Pods and requeue the owner API
+	// Watch for changes to secondary resource Pods and requeue the owner MAPPINGRULE
 	err = c.Watch(&source.Kind{Type: &corev1.Pod{}}, &handler.EnqueueRequestForOwner{
 		IsController: true,
-		OwnerType:    &apiv1alpha1.API{},
+		OwnerType:    &apiv1alpha1.MAPPINGRULE{},
 	})
 	if err != nil {
 		return err
@@ -62,28 +62,28 @@ func add(mgr manager.Manager, r reconcile.Reconciler) error {
 	return nil
 }
 
-var _ reconcile.Reconciler = &ReconcileAPI{}
+var _ reconcile.Reconciler = &ReconcileMAPPINGRULE{}
 
-// ReconcileAPI reconciles a API object
-type ReconcileAPI struct {
+// ReconcileMAPPINGRULE reconciles a MAPPINGRULE object
+type ReconcileMAPPINGRULE struct {
 	// This client, initialized using mgr.Client() above, is a split client
 	// that reads objects from the cache and writes to the apiserver
 	client client.Client
 	scheme *runtime.Scheme
 }
 
-// Reconcile reads that state of the cluster for a API object and makes changes based on the state read
-// and what is in the API.Spec
+// Reconcile reads that state of the cluster for a MAPPINGRULE object and makes changes based on the state read
+// and what is in the MAPPINGRULE.Spec
 // TODO(user): Modify this Reconcile function to implement your Controller logic.  This example creates
 // a Pod as an example
 // Note:
 // The Controller will requeue the Request to be processed again if the returned error is non-nil or
 // Result.Requeue is true, otherwise upon completion it will remove the work from the queue.
-func (r *ReconcileAPI) Reconcile(request reconcile.Request) (reconcile.Result, error) {
-	log.Printf("Reconciling API %s/%s\n", request.Namespace, request.Name)
+func (r *ReconcileMAPPINGRULE) Reconcile(request reconcile.Request) (reconcile.Result, error) {
+	log.Printf("Reconciling MAPPINGRULE %s/%s\n", request.Namespace, request.Name)
 
-	// Fetch the API instance
-	instance := &apiv1alpha1.API{}
+	// Fetch the MAPPINGRULE instance
+	instance := &apiv1alpha1.MAPPINGRULE{}
 	err := r.client.Get(context.TODO(), request.NamespacedName, instance)
 	if err != nil {
 		if errors.IsNotFound(err) {
@@ -99,7 +99,7 @@ func (r *ReconcileAPI) Reconcile(request reconcile.Request) (reconcile.Result, e
 	// Define a new Pod object
 	pod := newPodForCR(instance)
 
-	// Set API instance as the owner and controller
+	// Set MAPPINGRULE instance as the owner and controller
 	if err := controllerutil.SetControllerReference(instance, pod, r.scheme); err != nil {
 		return reconcile.Result{}, err
 	}
@@ -126,7 +126,7 @@ func (r *ReconcileAPI) Reconcile(request reconcile.Request) (reconcile.Result, e
 }
 
 // newPodForCR returns a busybox pod with the same name/namespace as the cr
-func newPodForCR(cr *apiv1alpha1.API) *corev1.Pod {
+func newPodForCR(cr *apiv1alpha1.MAPPINGRULE) *corev1.Pod {
 	labels := map[string]string{
 		"app": cr.Name,
 	}

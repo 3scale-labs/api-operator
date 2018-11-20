@@ -5,8 +5,8 @@ import (
 	"log"
 	"runtime"
 
-	"github.com/3scale/api-operator-old/api-operator/pkg/apis"
-	"github.com/3scale/api-operator-old/api-operator/pkg/controller"
+	"github.com/3scale/api-operator/api-operator/pkg/apis"
+	"github.com/3scale/api-operator/api-operator/pkg/controller"
 	"github.com/operator-framework/operator-sdk/pkg/k8sutil"
 	sdkVersion "github.com/operator-framework/operator-sdk/version"
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
