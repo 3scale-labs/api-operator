@@ -1,4 +1,14 @@
-# "API-Operator" Project main repository
+
+# DEPRECATED
+
+
+Check https://github.com/3scale/3scale-operator
+
+
+
+----
+
+## "API-Operator" Project main repository
 
 This is not a supported/official redhat product.
 
